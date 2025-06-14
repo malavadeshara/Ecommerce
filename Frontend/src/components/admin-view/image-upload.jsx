@@ -4,8 +4,9 @@ import { useEffect, useRef } from 'react';
 import { FileIcon, UploadCloudIcon, XIcon } from 'lucide-react';
 import { Button } from '../ui/button'
 import axios from 'axios';
+import { Skeleton } from '../ui/skeleton';
 
-function ProductImageUpload({ setImageLoadingState, imageFile, setImageFile, uploadedImageUrl, setUploadedImageUrl }) {
+function ProductImageUpload({ isEditMode, imageLoadingState, setImageLoadingState, imageFile, setImageFile, uploadedImageUrl, setUploadedImageUrl }) {
 
     const inputRef = useRef(null);
 
@@ -60,7 +61,7 @@ function ProductImageUpload({ setImageLoadingState, imageFile, setImageFile, upl
             </Label>
 
             <div
-                className='border-2 border-dashed rounded-lg p-4'
+                className={`${isEditMode ? 'opacity-65' : ''} border-2 border-dashed rounded-lg p-4`}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
             >
@@ -70,15 +71,17 @@ function ProductImageUpload({ setImageLoadingState, imageFile, setImageFile, upl
                     className='hidden'
                     ref={inputRef}
                     onChange={handleImageFileChange}
+                    disabled={isEditMode}
                 />
                 {
                     !imageFile ?
                         (
-                            <Label htmlFor="image-upload" className='flex flex-col items-center justify-center cursor-pointer h-32'>
+                            <Label htmlFor="image-upload" className={`${isEditMode ? 'cursor-not-allowed' : ''} flex flex-col items-center justify-center cursor-pointer h-32`}>
                                 <UploadCloudIcon className='w-10 h-10 text-gray-500 mb-2' />
                                 <span>Drag & Drop or click to upload image</span>
                             </Label>
                         ) : (
+                            imageLoadingState ? <Skeleton className='h-10 bg-gray-300' /> :
                             <div className='flex items-center justify-between'>
                                 <div className='flex items-center'>
                                     <FileIcon className='w-8 h-8 text-primary mr-2' />

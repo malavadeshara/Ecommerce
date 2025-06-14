@@ -48,6 +48,10 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;
+        }).addCase(logoutUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = null;
+            state.isAuthenticated = false;
         });
     }
 });
@@ -77,6 +81,15 @@ export const checkAuth = createAsyncThunk('/auth/check-auth',
             headers: {
                 'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
             }
+        });
+        return response.data;
+    }
+);
+
+export const logoutUser = createAsyncThunk('/auth/logout',
+    async () => {
+        const response = await axios.post('http://localhost:3000/api/auth/logout', {} ,{
+            withCredentials: true
         });
         return response.data;
     }

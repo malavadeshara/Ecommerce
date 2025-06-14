@@ -21,24 +21,21 @@ const AuthLogin = () => {
   function onSubmit(event) {
     event.preventDefault();
     dispatch(loginUser(formData))
-    .then((data) => {
-      if(data?.payload?.success) {
-        console.log(data.payload);
-        toast.success(data?.payload?.message);
-        if(payload.user.role === 'admin') {
-          navigate('/admin/dashboard');
-        } else {
-          navigate('/shop/home');
-        }
-        
-      } else {
-        toast.error("Something went wrong!");
-      }
-      console.log(data);
-    });
-  }
+      .then((data) => {
+        if (data?.payload?.success) {
+          toast.success(data?.payload?.message);
+          if (data?.payload?.user.role === 'admin') {
+            navigate('/admin/dashboard');
+          } else {
+            navigate('/shop/home');
+          }
 
-  console.log(formData);
+        } else {
+          toast.error("Something went wrong!");
+        }
+      }
+    );
+  }
 
   return (
     <div className='mx-auto w-full max-w-md space-y-6'>
@@ -49,7 +46,7 @@ const AuthLogin = () => {
           <Link to='/auth/register' className='text-primary hover:underline font-medium ml-2'>Signup</Link>
         </p>
       </div>
-      <CommonForm 
+      <CommonForm
         formControls={loginFormControls}
         buttonText={'Login'}
         formData={formData}
