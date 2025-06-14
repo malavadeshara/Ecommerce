@@ -3,7 +3,7 @@ import React from 'react'
 const NotFound = () => {
   return (
     <div>
-        Lawde Theek Se Route Daal, Ye Page Exist Hi Nahin Karta!!!
+        Theek Se Route Daal, Ye Page Exist Hi Nahin Karta!!!
     </div>
   )
 }

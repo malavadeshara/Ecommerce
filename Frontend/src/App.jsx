@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import AuthLayout from './components/auth/Layout'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import AuthLogin from './pages/auth/Login'
 import AuthRegister from './pages/auth/Register'
 import AdminLayout from './components/admin-view/Layout'
@@ -73,6 +73,8 @@ const App = () => {
         </Route>
 
         <Route path='*' element={<NotFound />} />
+
+        <Route path="/" element={<Navigate to="/auth/register" />} />
 
         <Route path='unauth-page' element={<UnAuthPage />} />
       </Routes>
