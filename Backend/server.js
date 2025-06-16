@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const authRouter = require('./routes/auth/auth-routes');
 const adminProductsRouter = require('./routes/admin/products-routes')
+const shopProductsRouter = require('./routes/shop/product-routes');
 
 const app = express();
 
@@ -31,7 +32,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
-app.use('/api/admin/products', adminProductsRouter)
+app.use('/api/admin/products', adminProductsRouter);
+app.use('/api/shop/products', shopProductsRouter);
 
 const PORT = process.env.PORT || 5000;
 
